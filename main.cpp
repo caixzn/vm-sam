@@ -1,8 +1,10 @@
+#include <cstddef>
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <variant>
 #include <vector>
 #include <stack>
 #include <map>
@@ -60,7 +62,13 @@ namespace sam {
 
     struct instruction {
         opcodes opcode;
-        void *operand;
+        std::variant<int32_t, float, char, size_t, std::string> operand;
+    };
+
+    template<typename T>
+    struct result {
+        T value;
+        std::string error;
     };
 
     std::vector<std::string> load(std::string path = "") {
@@ -84,8 +92,17 @@ namespace sam {
         return program;
     }
 
-    void tokenize(std::vector<std::string> program) {
-        ;
+    result<instruction> parse_line(std::string line) {
+        instruction instr;
+        return { instr, "" };
+    }
+
+    std::vector<instruction> tokenize(std::vector<std::string> program) {
+        std::vector<instruction> instructions;
+        uint32_t address = 0;
+        for (size_t i = 0; i < program.size(); ++i) {
+            parse_line(program[i]);
+        }
     }
 
     void interpret(void) {
