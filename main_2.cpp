@@ -193,13 +193,13 @@ lerInstrucao(const std::string &filename,
     }
 
     while (getline(file, line)) {
-        // 去除注释
+        // Deletar comentário
         std::size_t commentIndex = line.find("//");
         if (commentIndex != std::string::npos) {
             line = line.substr(0, commentIndex);
         }
 
-        // 去除行尾的空格
+        // Deletar espaços
         line.erase(line.find_last_not_of(" \t\n\r\f\v") + 1);
 
         if (!line.empty()) {
@@ -207,7 +207,7 @@ lerInstrucao(const std::string &filename,
             std::vector<std::string> tokens;
             std::string token;
 
-            // 分割行到单词
+            // Separar instrução e operando
             while (iss >> token) {
                 tokens.push_back(token);
             }
@@ -231,7 +231,7 @@ lerInstrucao(const std::string &filename,
 }
 
 int main() {
-    const std::string filename = "./entradas/SAM-functions.sam";
+    const std::string filename = "ARQUIVO.TXT";
     std::unordered_map<std::string, int> labels; // Salvar label e posição
 
     // Carregar conteúdo de arquivo
