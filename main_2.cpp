@@ -165,7 +165,7 @@ class VirtualMachine {
                 break;
             case OpCode::STOP:
                 return;
-            default:
+            default: // Instrução inexistente ou não implementada
                 std::cerr << "Unknown instruction: " << instruction[0]
                           << std::endl;
                 return;
